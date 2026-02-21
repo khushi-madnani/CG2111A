@@ -22,9 +22,9 @@ volatile int msPerDeg = 10;
 volatile uint8_t currentPin = 0;
 
 // Helper to convert angle to ticks (0.5us resolution)
-// 0 deg = 1000 ticks (0.5ms), 180 deg = 5000 ticks (2.5ms)
+// 0 deg = 1000 ticks (0.5ms), 180 deg = 5000 ticks (2.5ms) oliver: i changed the range from 1ms to 2ms since sg90 expects that range, anything beyond might cause it to punch, if you want a wider range u can do 0.9-2.1ms 
 int angleToPulse(int angle) { //this function ensures that we sorta stay within the range of pulses based on what angle we want(0-180 deg)
-  return 1000 + ((long)angle * 4000 / 180);
+  return 2000 + ((long)angle * 2000 / 180);
 }
 
 int parse3(const String *s) { //converts s digit input into an int
