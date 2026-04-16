@@ -1,0 +1,7 @@
+local_docker/ 
+local_docker/* 
+*.pgm 
+*.yaml 
+*.mcap 
+*.db3 
+.ros/ 

@@ -1,0 +1,24 @@
+services:
+  robot_brain:
+    # build: .
+    image: my_robot_build_v1
+    container_name: ros_slam
+    network_mode: host
+    privileged: true
+    volumes:
+      - .:/ros2_ws
+    environment:
+      - ROS_DOMAIN_ID=30
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0" # RPLidar
+      - "/dev/ttyACM0:/dev/ttyACM0" # Arduino Mega
+    # command: >
+    #   bash -c "git config --global --add safe.directory /ros2_ws/src/foxglove-sdk &&
+    #            source /opt/ros/humble/setup.bash &&
+    #            cd /ros2_ws &&
+    #            colcon build --packages-select foxglove_bridge --cmake-args -DCMAKE_BUILD_TYPE=Release &&
+    #            source install/setup.bash &&
+    #            ros2 launch foxglove_bridge foxglove_bridge_launch.xml port:=8765"
+    stdin_open: true
+    tty: true
+    restart: always

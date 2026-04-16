@@ -1,0 +1,22 @@
+services:
+  robot_brain:
+    build: .
+    container_name: ros_slam
+    network_mode: host
+    privileged: true
+    ports:
+      - "7410-7411:7410-7411/udp"
+      - "11811:11811/udp"
+    volumes:
+      - ./src:/ros2_ws/src
+      - ./force_pi.xml:/ros2_ws/force_pi.xml
+    environment:
+      - ROS_DOMAIN_ID=30
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0" # RPLidar
+      - "/dev/ttyACM0:/dev/ttyACM0" # Arduino Mega
+    stdin_open: true
+    tty: true
+    restart: always
+
+
